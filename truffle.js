@@ -11,6 +11,12 @@ module.exports = {
       port: 8544,
       network_id: "2017111499",
       gas: 4612388
+    },
+    rinkeby: {
+      host: "geth",
+      port: 8544,
+      network_id: "4",
+      gas: 4612388
     }
   }
 };

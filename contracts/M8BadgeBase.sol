@@ -10,13 +10,13 @@ contract M8BadgeBase {
     event Transfer(address from, address to, uint256 tokenId);
 
     struct M8Badge {
-        uint256 donationTransactionId;
+        string donationTransactionId;
         string name;
     }
 
     M8Badge[] badges; 
 
-    /// @dev A mapping from badge IDs to the address that owns them. All badges have
+    /// @dev A mapping from badge IDs to _createBadge the address that owns them. All badges have
     ///  some valid owner address, even gen0 badges are created with a non-zero owner.
     mapping (uint256 => address) public badgeIndexToOwner;
 
@@ -45,7 +45,8 @@ contract M8BadgeBase {
         Transfer(_from, _to, _tokenId);
     }
 
-    function _createBadge(uint256 _donationTransactionId, string _name, address _owner) internal returns (uint) {
+    function _createBadge(string _donationTransactionId, string _name, address _owner) internal returns (uint) {
+
         M8Badge memory _badge = M8Badge({
             donationTransactionId: _donationTransactionId,
             name: _name
@@ -62,5 +63,7 @@ contract M8BadgeBase {
         // This will assign ownership, and also emit the Transfer event as
         // per ERC721 draft
         _transfer(0, _owner, newBadgeId);
+
+        return newBadgeId;
     }
 }
